@@ -23,7 +23,7 @@ jobs:
         run: |
           mv ./fork/searx/settings.yml ./fork/searx/settings.yml.backup
           cp -r ./settings.yml ./fork/searx/settings.yml
-          # sed -i "s|ultrasecretkey|$(openssl rand -hex 32)|g" ./fork/searx/settings.yml
+          sed -i "s|ultrasecretkey|$(openssl rand -hex 32)|g" ./fork/searx/settings.yml
           cp -r  ./fork/* .
           rm -rf ./fork
       - name: Get last commit message
