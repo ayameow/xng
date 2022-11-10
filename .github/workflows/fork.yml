@@ -22,7 +22,7 @@ jobs:
       - name: copy from sync-repo
         run: |
           mv ./fork/searx/settings.yml ./fork/searx/settings.yml.backup
-          sed -i "s|ultrasecretkey|$(openssl rand -hex 32)|g" ./settings.yml
+          # sed -i "s|ultrasecretkey|$(openssl rand -hex 32)|g" ./settings.yml
           cp -r ./settings.yml ./fork/searx/settings.yml
           cp -r  ./fork/* .
           rm -rf ./fork
