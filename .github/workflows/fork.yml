@@ -1,0 +1,36 @@
+name: Fork
+
+on:
+  schedule:
+  - cron: '0 0 */1 * *' # every day
+  workflow_dispatch:
+
+env:
+  SYNC_REPO: searxng/searxng
+
+
+jobs:
+  fork:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Checkout sync-repo
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ env.SYNC_REPO }}
+          path: './fork'
+      - name: copy from sync-repo
+        run: |
+          mv ./fork/searx/settings.yml ./fork/searx/settings.yml.backup
+          mv ./settings.yml ./fork/searx/settings.yml
+          cp -r  ./fork/* .
+          rm -rf ./fork
+      - name: Get last commit message
+        id: last-commit-message
+        run: |
+          echo "::set-output name=msg::$(git log -1 --pretty=%s)"
+      - uses: EndBug/add-and-commit@v9
+        with:
+          message: ${{ steps.last-commit-message.outputs.msg }}
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
