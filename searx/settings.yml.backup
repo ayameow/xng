@@ -1135,6 +1135,29 @@ engines:
     engine: photon
     shortcut: ph
 
+  - name: piped
+    engine: piped
+    shortcut: ppd
+    categories: videos
+    piped_filter: videos
+    timeout: 3.0
+
+    # URL to use as link and for embeds
+    frontend_url: https://srv.piped.video
+    # Instance will be selected randomly, for more see https://piped-instances.kavin.rocks/
+    backend_url:
+      - https://pipedapi.kavin.rocks
+      - https://pipedapi-libre.kavin.rocks
+      - https://pipedapi.adminforge.de
+
+  - name: piped.music
+    engine: piped
+    network: piped
+    shortcut: ppdm
+    categories: music
+    piped_filter: music_songs
+    timeout: 3.0
+
   - name: piratebay
     engine: piratebay
     shortcut: tpb
@@ -1733,10 +1756,11 @@ engines:
   #   engine: yacy
   #   shortcut: ya
   #   base_url: http://localhost:8090
-  # required if you aren't using HTTPS for your local yacy instance'
+  #   # required if you aren't using HTTPS for your local yacy instance'
   #   enable_http: true
-  #   number_of_results: 5
   #   timeout: 3.0
+  #   # Yacy search mode. 'global' or 'local'.
+  #   search_mode: 'global'
 
   - name: rumble
     engine: rumble
