@@ -328,6 +328,20 @@ engines:
     enable_http: true
     shortcut: ah
 
+  - name: anaconda
+    engine: xpath
+    paging: true
+    first_page_num: 0
+    search_url: https://anaconda.org/search?q={query}&page={pageno}
+    results_xpath: //tbody/tr
+    url_xpath: ./td/h5/a[last()]/@href
+    title_xpath: ./td/h5
+    content_xpath: ./td[h5]/text()
+    categories: it
+    timeout: 6.0
+    shortcut: conda
+    disabled: true
+
   - name: arch linux wiki
     engine: archlinux
     shortcut: al
@@ -886,6 +900,29 @@ engines:
     timeout: 4.0
     disabled: true
 
+  - name: lemmy communities
+    engine: lemmy
+    lemmy_type: Communities
+    shortcut: leco
+
+  - name: lemmy users
+    engine: lemmy
+    network: lemmy communities
+    lemmy_type: Users
+    shortcut: leus
+
+  - name: lemmy posts
+    engine: lemmy
+    network: lemmy communities
+    lemmy_type: Posts
+    shortcut: lepo
+
+  - name: lemmy comments
+    engine: lemmy
+    network: lemmy communities
+    lemmy_type: Comments
+    shortcut: lecom
+
   - name: library genesis
     engine: xpath
     search_url: https://libgen.fun/search.php?req={query}
@@ -1408,6 +1445,11 @@ engines:
   #      WHERE title LIKE :wildcard OR description LIKE :wildcard
   #      ORDER BY duration DESC
 
+  - name: tagesschau
+    engine: tagesschau
+    shortcut: ts
+    disabled: true
+
   # Requires Tor
   - name: torch
     engine: xpath
@@ -1612,7 +1654,8 @@ engines:
     # Or you can use the html non-stable engine, activated by default
     engine: wolframalpha_noapi
     timeout: 6.0
-    categories: []
+    categories: general
+    disabled: true
 
   - name: dictzone
     engine: dictzone
