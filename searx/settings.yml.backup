@@ -1008,6 +1008,12 @@ engines:
   #   collection: 'reviews'  # name of the db collection
   #   key: 'name'  # key in the collection to search for
 
+  - name: mwmbl
+    engine: mwmbl
+    # api_url: https://api.mwmbl.org
+    shortcut: mwm
+    disabled: true
+
   - name: npm
     engine: json_engine
     paging: true
@@ -1952,6 +1958,23 @@ engines:
   - name: bt4g
     engine: bt4g
     shortcut: bt4g
+
+  - name: pkg.go.dev
+    engine: xpath
+    shortcut: pgo
+    search_url: https://pkg.go.dev/search?limit=100&m=package&q={query}
+    results_xpath: /html/body/main/div[contains(@class,"SearchResults")]/div[not(@class)]/div[@class="SearchSnippet"]
+    url_xpath: ./div[@class="SearchSnippet-headerContainer"]/h2/a/@href
+    title_xpath: ./div[@class="SearchSnippet-headerContainer"]/h2/a
+    content_xpath: ./p[@class="SearchSnippet-synopsis"]
+    categories: [packages, it]
+    timeout: 3.0
+    disabled: true
+    about:
+      website: https://pkg.go.dev/
+      use_official_api: false
+      require_api_key: false
+      results: HTML
 
 # Doku engine lets you access to any Doku wiki instance:
 # A public one or a privete/corporate one.
