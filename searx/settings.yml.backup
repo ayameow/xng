@@ -813,10 +813,11 @@ engines:
   - name: habrahabr
     engine: xpath
     paging: true
-    search_url: https://habrahabr.ru/search/page{pageno}/?q={query}
-    url_xpath: //article[contains(@class, "post")]//a[@class="post__title_link"]/@href
-    title_xpath: //article[contains(@class, "post")]//a[@class="post__title_link"]
-    content_xpath: //article[contains(@class, "post")]//div[contains(@class, "post__text")]
+    search_url: https://habr.com/en/search/page{pageno}/?q={query}
+    results_xpath: //article[contains(@class, "tm-articles-list__item")]
+    url_xpath: .//a[@class="tm-title__link"]/@href
+    title_xpath: .//a[@class="tm-title__link"]
+    content_xpath: .//div[contains(@class, "article-formatted-body")]
     categories: it
     timeout: 4.0
     disabled: true
@@ -1214,10 +1215,10 @@ engines:
     shortcut: pd
     search_url: https://pub.dev/packages?q={query}&page={pageno}
     paging: true
-    results_xpath: /html/body/main/div/div[@class="search-results"]/div[@class="packages"]/div
+    results_xpath: //div[contains(@class,"packages-item")]
     url_xpath: ./div/h3/a/@href
     title_xpath: ./div/h3/a
-    content_xpath: ./p[@class="packages-description"]
+    content_xpath: ./div/div/div[contains(@class,"packages-description")]/span
     categories: [packages, it]
     timeout: 3.0
     disabled: true
@@ -1421,8 +1422,6 @@ engines:
     shortcut: solid
     timeout: 4.0
     base_url:
-      - https://solidtorrents.net
-      - https://solidtorrents.eu
       - https://solidtorrents.to
       - https://bitsearch.to
 
