@@ -219,8 +219,7 @@ def response(resp):
     json_resp = json_data[1]['data']['body']['response']
 
     if brave_category == 'news':
-        json_resp = json_resp['news']
-        return _parse_news(json_resp)
+        return _parse_news(json_resp['news'])
 
     if brave_category == 'images':
         return _parse_images(json_resp)
@@ -299,7 +298,7 @@ def _parse_news(json_resp):
             'title': result['title'],
             'content': result['description'],
         }
-        if result['thumbnail'] != "null":
+        if result['thumbnail'] is not None:
             item['img_src'] = result['thumbnail']['src']
         result_list.append(item)
 
@@ -339,7 +338,7 @@ def _parse_videos(json_resp):
             'duration': result['video']['duration'],
         }
 
-        if result['thumbnail'] != "null":
+        if result['thumbnail'] is not None:
             item['thumbnail'] = result['thumbnail']['src']
 
         iframe_src = _get_iframe_src(url)
