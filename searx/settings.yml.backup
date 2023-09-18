@@ -1256,7 +1256,7 @@ engines:
       results: HTML
 
   - name: qwant
-    qwant_categ: web
+    qwant_categ: web-lite
     engine: qwant
     shortcut: qw
     categories: [general, web]
@@ -1751,6 +1751,11 @@ engines:
       use_official_api: false
       require_api_key: false
       results: HTML
+
+  - name: moviepilot
+    engine: moviepilot
+    shortcut: mp
+    disabled: true
 
   - name: naver
     shortcut: nvr
