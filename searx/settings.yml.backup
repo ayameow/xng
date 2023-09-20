@@ -215,7 +215,6 @@ outgoing:
 #   # these plugins are disabled if nothing is configured ..
 #   - 'Hostname replace'  # see hostname_replace configuration below
 #   - 'Open Access DOI rewrite'
-#   - 'Vim-like hotkeys'
 #   - 'Tor check plugin'
 #   # Read the docs before activate: auto-detection of the language could be
 #   # detrimental to users expectations / users can activate the plugin in the
@@ -372,7 +371,10 @@ engines:
   - name: wikipedia
     engine: wikipedia
     shortcut: wp
+    # add "list" to the array to get results in the results list
+    display_type: ["infobox"]
     base_url: 'https://{language}.wikipedia.org/'
+    categories: [general]
 
   - name: bilibili
     engine: bilibili
@@ -585,7 +587,10 @@ engines:
     shortcut: wd
     timeout: 3.0
     weight: 2
+    # add "list" to the array to get results in the results list
+    display_type: ["infobox"]
     tests: *tests_infobox
+    categories: [general]
 
   - name: duckduckgo
     engine: duckduckgo
@@ -1259,7 +1264,7 @@ engines:
       results: HTML
 
   - name: qwant
-    qwant_categ: web-lite
+    qwant_categ: web
     engine: qwant
     shortcut: qw
     categories: [general, web]
@@ -1623,6 +1628,7 @@ engines:
     categories: [general, wikimedia]
     base_url: "https://{language}.wikisource.org/"
     search_type: text
+    disabled: true
     about:
       website: https://www.wikisource.org/
       wikidata_id: Q263
