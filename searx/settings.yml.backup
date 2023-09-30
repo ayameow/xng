@@ -209,7 +209,6 @@ outgoing:
 # enabled_plugins:
 #   # these plugins are enabled if nothing is configured ..
 #   - 'Hash plugin'
-#   - 'Search on category select'
 #   - 'Self Information'
 #   - 'Tracker URL remover'
 #   - 'Ahmia blacklist'  # activation depends on outgoing.using_tor_proxy
@@ -1488,6 +1487,7 @@ engines:
   - name: tmdb
     engine: xpath
     paging: true
+    categories: movies
     search_url: https://www.themoviedb.org/search?page={pageno}&query={query}
     results_xpath: //div[contains(@class,"movie") or contains(@class,"tv")]//div[contains(@class,"card")]
     url_xpath: .//div[contains(@class,"poster")]/a/@href
@@ -1925,6 +1925,23 @@ engines:
     shortcut: svg
     timeout: 10.0
     disabled: true
+
+  - name: tootfinder
+    engine: json_engine
+    categories: ['social media']
+    paging: false
+    search_url: https://www.tootfinder.ch/rest/api/search/{query}
+    url_query: uri
+    title_query: card/title
+    content_query: content
+    thumbnail_query: card/image
+    shortcut: toot
+    about:
+      website: https://tootfinder.ch/
+      official_api_documentation: https://wiki.tootfinder.ch/index.php?name=the-tootfinder-rest-api
+      use_official_api: true
+      require_api_key: false
+      results: 'JSON'
 
   - name: wallhaven
     engine: wallhaven
