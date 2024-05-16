@@ -22,6 +22,29 @@ categories = ["it", "packages"]
 paging = True
 search_url = "https://hex.pm/api/packages/"
 
+linked_terms = {
+    # lower-case : replacement
+    "author": "Author",
+    "bitbucket": "Bitbucket",
+    "bug tracker": "Issue tracker",
+    "changelog": "Changelog",
+    "doc": "Documentation",
+    "docs": "Documentation",
+    "documentation": "Documentation",
+    "github repository": "GitHub",
+    "github": "GitHub",
+    "gitlab": "GitLab",
+    "issues": "Issue tracker",
+    "project source code": "Source code",
+    "repository": "Source code",
+    "scm": "Source code",
+    "sourcehut": "SourceHut",
+    "sources": "Source code",
+    "sponsor": "Sponsors",
+    "sponsors": "Sponsors",
+    "website": "Homepage",
+}
+
 
 def request(query: str, params):
     args = urlencode({"page": params["pageno"], "search": query})
@@ -33,23 +56,22 @@ def response(resp):
     results = []
     for package in resp.json():
         meta = package["meta"]
-        publishedDate = package.get("inserted_at")
-        if publishedDate:
-            publishedDate = parser.parse(publishedDate)
-        tags = meta.get("licenses", [])
+        published_date = package.get("updated_at")
+        published_date = parser.parse(published_date)
+        links = {linked_terms.get(k.lower(), k): v for k, v in meta.get("links").items()}
         results.append(
             {
                 "template": "packages.html",
-                "url": package["url"],
+                "url": package["html_url"],
                 "title": package["name"],
                 "package_name": package["name"],
                 "content": meta.get("description", ""),
                 "version": meta.get("latest_version"),
                 "maintainer": ", ".join(meta.get("maintainers", [])),
-                "publishedDate": publishedDate,
-                "tags": tags,
-                "homepage": meta.get("links", {}).get("homepage"),
-                "source_code_url": meta.get("links", {}).get("github"),
+                "publishedDate": published_date,
+                "license_name": ", ".join(meta.get("licenses", [])),
+                "homepage": package["docs_html_url"],
+                "links": links,
             }
         )
 
