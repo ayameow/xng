@@ -1461,6 +1461,12 @@ engines:
       description: "Demo index of Kavunka, a statistical search engine"
       results: HTML
 
+  - name: keenable
+    engine: keenable
+    shortcut: keen
+    disabled: true
+    inactive: true
+
   - name: kozmonavt
     engine: xpath
     search_url: https://kozmonavt.su/s?q={query}
@@ -2016,41 +2022,6 @@ engines:
     shortcut: poc
     disabled: true
 
-  - name: presearch
-    engine: presearch
-    search_type: search
-    categories: [general, web]
-    shortcut: ps
-    timeout: 4.0
-    disabled: true
-
-  - name: presearch images
-    engine: presearch
-    network: presearch
-    search_type: images
-    categories: [images, web]
-    timeout: 4.0
-    shortcut: psimg
-    disabled: true
-
-  - name: presearch videos
-    engine: presearch
-    network: presearch
-    search_type: videos
-    categories: [general, web]
-    timeout: 4.0
-    shortcut: psvid
-    disabled: true
-
-  - name: presearch news
-    engine: presearch
-    network: presearch
-    search_type: news
-    categories: [news, web]
-    timeout: 4.0
-    shortcut: psnews
-    disabled: true
-
   - name: pub.dev
     engine: xpath
     shortcut: pd
@@ -2175,12 +2146,6 @@ engines:
       use_official_api: false
       require_api_key: false
       results: JSON
-
-  - name: reddit
-    engine: reddit
-    shortcut: re
-    page_size: 25
-    disabled: true
 
   - name: reuters
     engine: reuters
