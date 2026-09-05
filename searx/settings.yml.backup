@@ -183,20 +183,13 @@ outgoing:
   useragent_suffix: ""
   # The maximum number of concurrent connections that may be established.
   pool_connections: 100
-  # Allow the connection pool to maintain keep-alive connections below this
-  # point.
-  pool_maxsize: 20
-  # See https://www.python-httpx.org/http2/
+  # Enables the use of HTTP2
   enable_http2: true
   # uncomment below section if you want to use a custom server certificate
-  # see https://www.python-httpx.org/advanced/#changing-the-verification-defaults
-  # and https://www.python-httpx.org/compatibility/#ssl-configuration
+  # see https://curl-cffi.readthedocs.io/en/latest/quick_start.html
   #  verify: ~/.mitmproxy/mitmproxy-ca-cert.cer
   #
-  # uncomment below section if you want to use a proxyq see: SOCKS proxies
-  #   https://2.python-requests.org/en/latest/user/advanced/#proxies
-  # are also supported: see
-  #   https://2.python-requests.org/en/latest/user/advanced/#socks
+  # uncomment below section if you want to use a proxy
   #
   #  proxies:
   #    all://:
@@ -3307,13 +3300,6 @@ engines:
       website: https://minecraft.wiki/
       wikidata_id: Q105533483
 
-  # s1search google engines / mirrors
-  - name: searchtoday
-    engine: s1search
-    shortcut: std
-    base_url: https://info.searchtoday.site
-    disabled: true
-
   - name: sina
     engine: json_engine
     shortcut: sina
@@ -3356,6 +3342,13 @@ engines:
     engine: s1search
     shortcut: zoo
     base_url: https://search.zoo.com
+    disabled: true
+    inactive: true
+
+  # s1search engines / mirrors with rampjs page layout
+  - name: s1search
+    engine: s1search_rampjs
+    shortcut: s1
     disabled: true
     inactive: true
 
